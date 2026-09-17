@@ -33,7 +33,7 @@ function Index() {
         <InkVine className="pointer-events-none absolute bottom-3 right-1 h-32 w-20 opacity-60 sm:bottom-6 sm:right-5 sm:h-44 sm:w-28" flip />
         <div className="relative z-10 w-full max-w-[540px] text-center">
           <p className="eyebrow">ZAR · Digital Invitations</p>
-          <div className="bg-gold-deep/70 mx-auto mt-8 h-1 w-1 rounded-full" aria-hidden="true" />
+          <div className="bg-rose-clay mx-auto mt-8 h-1.5 w-1.5 rounded-full" aria-hidden="true" />
           <h1 className="sr-only">Written in Ink</h1>
           <InkWrite text="Written in Ink" fontSize={94} className="mx-auto mt-5 block w-full max-w-[510px]" duration={2.6} />
           <p className="text-ink-soft mt-1 font-serif text-xl italic sm:text-2xl">A story, beautifully told.</p>

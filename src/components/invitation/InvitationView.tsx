@@ -22,7 +22,7 @@ function InkOrigin() {
         <div className="relative mt-8 h-40 w-full max-w-[320px]">
           {/* the first drop of ink */}
           <motion.span
-            className="bg-ink absolute left-1/2 top-2 block rounded-full"
+            className="bg-rose-clay absolute left-1/2 top-2 block rounded-full"
             initial={{ width: 0, height: 0, opacity: 0 }}
             animate={{ width: 9, height: 9, opacity: 1 }}
             transition={{ duration: reduced ? 0 : 0.9, ease: "easeOut" }}

@@ -28,11 +28,11 @@ export function BrandTicker({ brandName }: BrandTickerProps) {
         bottom: 0,
         height: "clamp(13px, 1.7vh, 20px)",
         background:
-          "linear-gradient(90deg, transparent, oklch(0.96 0.02 88 / 32%) 12%, oklch(0.96 0.02 88 / 40%) 50%, oklch(0.96 0.02 88 / 32%) 88%, transparent)",
-        borderTop: "0.5px solid oklch(0.68 0.075 78 / 45%)",
-        borderBottom: "0.5px solid oklch(0.68 0.075 78 / 45%)",
+          "linear-gradient(90deg, transparent, oklch(0.23 0.02 65 / 28%) 12%, oklch(0.23 0.02 65 / 36%) 50%, oklch(0.23 0.02 65 / 28%) 88%, transparent)",
+        borderTop: "0.5px solid oklch(0.71 0.085 77 / 45%)",
+        borderBottom: "0.5px solid oklch(0.71 0.085 77 / 45%)",
         backdropFilter: "blur(1px)",
-        boxShadow: "0 0 12px -6px oklch(0.68 0.075 78 / 60%)",
+        boxShadow: "0 0 12px -6px oklch(0.71 0.085 77 / 50%)",
       }}
       aria-hidden
     >
