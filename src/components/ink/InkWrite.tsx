@@ -48,31 +48,22 @@ export function InkWrite({
   useEffect(() => {
     const el = measureRef.current;
     if (!el) return;
-    let frame = requestAnimationFrame(() => {
+    const measure = () => {
       try {
         const b = el.getBBox();
-        if (!b.width) {
-          frame = requestAnimationFrame(() => {
-            const b2 = el.getBBox();
-            setBox({
-              x: b2.x - fontSize * 0.18,
-              y: b2.y - fontSize * 0.3,
-              w: b2.width + fontSize * 0.36,
-              h: b2.height + fontSize * 0.6,
-            });
-          });
-          return;
-        }
+        if (!b.width) return;
         setBox({
-          x: b.x - fontSize * 0.18,
-          y: b.y - fontSize * 0.3,
-          w: b.width + fontSize * 0.36,
-          h: b.height + fontSize * 0.6,
+          x: b.x - fontSize * 0.28,
+          y: b.y - fontSize * 0.38,
+          w: b.width + fontSize * 0.56,
+          h: b.height + fontSize * 0.76,
         });
       } catch {
         /* measurement unavailable */
       }
-    });
+    };
+    const frame = requestAnimationFrame(measure);
+    void document.fonts.ready.then(measure);
     return () => cancelAnimationFrame(frame);
   }, [text, fontSize, fontFamily, letterSpacing]);
 
@@ -119,7 +110,15 @@ export function InkWrite({
       aria-label={text}
     >
       <defs>
-        <mask id={maskId} maskUnits="userSpaceOnUse">
+        <mask
+          id={maskId}
+          maskUnits="userSpaceOnUse"
+          maskContentUnits="userSpaceOnUse"
+          x={box.x}
+          y={box.y}
+          width={box.w}
+          height={box.h}
+        >
           <motion.path
             d={d}
             stroke="white"
