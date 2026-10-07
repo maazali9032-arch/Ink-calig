@@ -520,7 +520,14 @@ function MusicToggle({ url }: { url: string }) {
 export function InvitationExperience({ data }: { data: Data }) {
   return (
     <main className="relative">
-      <BrandTicker brandName={data.brandName} />
+      <img
+        src="/decorative-frame.webp"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-40 hidden h-full w-full object-fill max-[684px]:block"
+      />
+      <div className="relative z-50">
+        <BrandTicker brandName={data.brandName} />
       <InkOrigin />
       <Hero data={data} />
       <Families data={data} />
@@ -530,7 +537,8 @@ export function InvitationExperience({ data }: { data: Data }) {
       <Rsvp />
       <Contacts data={data} />
       <Closing />
-      {data.musicEnabled && data.musicUrl ? <MusicToggle url={data.musicUrl} /> : null}
+        {data.musicEnabled && data.musicUrl ? <MusicToggle url={data.musicUrl} /> : null}
+      </div>
     </main>
   );
 }
