@@ -107,6 +107,11 @@ function Hero({ data }: { data: Data }) {
             <p className="text-ink font-serif text-xl tracking-[0.18em] uppercase">{data.weddingDate}</p>
           </>
         ) : null}
+        {data.startTime || data.endTime ? (
+          <p className="text-ink-soft mt-2 font-serif text-base tracking-[0.12em] uppercase">
+            {[data.startTime, data.endTime].filter(Boolean).join(" – ")}
+          </p>
+        ) : null}
       </Reveal>
     </section>
   );
@@ -239,7 +244,18 @@ function Events({ data }: { data: Data }) {
                 {e.date ? <p>{e.date}</p> : null}
                 {e.time ? <p>{e.time}</p> : null}
                 {e.venue ? <p>{e.venue}</p> : null}
+                {e.city ? <p>{e.city}</p> : null}
                 {e.note ? <p className="text-ink-faint">{e.note}</p> : null}
+                {e.mapsUrl ? (
+                  <a
+                    href={e.mapsUrl}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-gold mt-2 inline-flex items-center gap-1.5 text-xs tracking-[0.14em] uppercase"
+                  >
+                    <MapPin className="h-3 w-3" /> Directions
+                  </a>
+                ) : null}
               </div>
             </Reveal>
           ))}

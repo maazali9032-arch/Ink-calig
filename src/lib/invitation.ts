@@ -10,6 +10,8 @@ export interface EventItem {
   time?: string | undefined;
   note?: string | undefined;
   venue?: string | undefined;
+  city?: string | undefined;
+  mapsUrl?: string | undefined;
 }
 
 export interface ContactItem {
@@ -37,6 +39,8 @@ export interface InvitationView {
   brideParents?: string | undefined;
   relatives?: string[] | undefined;
   weddingDate?: string | undefined;
+  startTime?: string | undefined;
+  endTime?: string | undefined;
   invitationMessage?: string | undefined;
   events: EventItem[];
   venueName?: string | undefined;
@@ -94,6 +98,10 @@ function list(root: Any, ...paths: string[]): unknown[] {
 }
 
 function strList(root: Any, ...paths: string[]): string[] {
+  for (const path of paths) {
+    const value = get(root, path);
+    if (typeof value === "string" && value.trim()) return [value.trim()];
+  }
   return list(root, ...paths)
     .map((item) => {
       if (typeof item === "string") return item.trim();
@@ -158,8 +166,10 @@ export function normalizeInvitation(raw: unknown): InvitationView {
       time: str(e, "time", "event_time", "start_time"),
       note: str(e, "note", "description", "detail"),
       venue: str(e, "venue", "venue_name", "location"),
+      city: str(e, "city"),
+      mapsUrl: safeUrl(str(e, "maps_url", "mapsUrl")),
     };
-  }).filter((e) => Boolean(e.name || e.date || e.time || e.note || e.venue));
+  }).filter((e) => Boolean(e.name || e.date || e.time || e.note || e.venue || e.city || e.mapsUrl));
 
   const contacts: ContactItem[] = list(c, "contacts").slice(0, 2).filter(isObj)
     .map((raw) => {
@@ -187,11 +197,13 @@ export function normalizeInvitation(raw: unknown): InvitationView {
     brideParents: str(c, "bride_parents", "bride.parents", "bride_parents_text"),
     relatives: strList(c, "relatives", "relatives_list"),
     weddingDate: str(c, "wedding_date", "date", "wedding_date_text"),
+    startTime: str(c, "start_time"),
+    endTime: str(c, "end_time"),
     invitationMessage: str(c, "invitation_message", "message", "invite_message"),
     events,
     venueName: str(c, "venue_name", "venue.name"),
     venueAddress: str(c, "venue_address", "venue.address"),
-    venueCity: str(c, "venue_city", "venue.city"),
+    venueCity: str(c, "city"),
     venueMapsUrl: safeUrl(str(c, "maps_url")),
     venueImage: safeUrl(str(c, "venue_image_url")),
     gallery: strList(c, "gallery").map((url) => safeUrl(url)).filter((url): url is string => Boolean(url)),
